@@ -9,7 +9,13 @@
     background-color: transparent;
     background-position: 50% 50%;
     background-size: 22px;
+    transition: opacity 0.2s ease;
 }
+
+.profile__add-button:hover {
+    opacity: 0.6;
+}
+
 @media screen and (max-width: 1023px) {
     .profile__add-button {
         width: 282px;
