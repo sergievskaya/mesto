@@ -9,6 +9,7 @@
     background-color: transparent;
     background-position: 50% 50%;
     background-size: 10px;
+    cursor: pointer;
     transition: opacity 0.2s ease;
 }
 

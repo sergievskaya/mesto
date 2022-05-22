@@ -1,84 +1,94 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Место</title>
+    <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="body">
-  <div class="page">
-      <header class="header">
-        <img src="./images/header-logo.svg" alt="логотип Место" class="header__logo">
-      </header>
+    <div class="page">
+        <header class="header">
+            <img src="./images/header-logo.svg" alt="логотип Место" class="header__logo">
+        </header>
 
-      <main class="content">
-        <section class="profile">
-            <div class="profile__container">
-                <img src="./images/profile-avatar.jpg" alt="аватар пользователя" class="profile__avatar-image">
-                <div class="profile__info">
-                    <h1 class="profile__title">Жак-Ив Кусто</h1>
-                    <button class="profile__edit-button" type="button"></button>
-                    <p class="profile__subtitle">Исследователь океана</p>
+        <main class="content">
+            <section class="profile">
+                <div class="profile__container">
+                    <img src="./images/profile-avatar.jpg" alt="аватар пользователя" class="profile__avatar-image">
+                    <div class="profile__info">
+                        <h1 class="profile__title">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" type="button"></button>
+                        <p class="profile__subtitle">Исследователь океана</p>
+                    </div>
                 </div>
+                <button class="profile__add-button" type="button"></button>
+            </section>
+
+            <section class="elements">
+                <ul class="elements__list">
+                    <li class="elements__item">
+                        <img src="./images/elements-image-karachayevsk.jpg" alt="фотография Карачаевск" class="elements__image">
+                        <div class="elements__container">
+                            <h2 class="elements__text">Карачаевск</h2>
+                            <button class="elements__like-button" type="button"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img src="./images/elements-image-elbrus.jpg" alt="фотография Гора Эльбрус" class="elements__image">
+                        <div class="elements__container">
+                            <h2 class="elements__text">Гора Эльбрус</h2>
+                            <button class="elements__like-button" type="button"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img src="./images/elements-image-dombay.jpg" alt="фотография Домбай" class="elements__image">
+                        <div class="elements__container">
+                            <h2 class="elements__text">Домбай</h2>
+                            <button class="elements__like-button" type="button"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img src="./images/elements-image-elbrus.jpg" alt="фотография гора Эльбрус" class="elements__image">
+                        <div class="elements__container">
+                            <h2 class="elements__text">Гора Эльбрус</h2>
+                            <button class="elements__like-button" type="button"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img src="./images/elements-image-dombay.jpg" alt="фотография Домбай" class="elements__image">
+                        <div class="elements__container">
+                            <h2 class="elements__text">Домбай</h2>
+                            <button class="elements__like-button" type="button"></button>
+                        </div>
+                    </li>
+                    <li class="elements__item">
+                        <img src="./images/elements-image-karachayevsk.jpg" alt="фотография Карачаевск" class="elements__image">
+                        <div class="elements__container">
+                            <h2 class="elements__text">Карачаево-Черкесия</h2>
+                            <button class="elements__like-button" type="button"></button>
+                        </div>
+                    </li>              
+                </ul>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2022. Екатерина Сергиевская</p>
+        </footer>
+
+        <div class="popup">
+            <div class="popup__container">
+                <button class="popup__close" type="button"></button>
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form action="" class="popup__form">
+                    <input type="text" class="popup__input" placeholder="Имя">
+                    <input type="text" class="popup__input" placeholder="О себе">
+                    <button class="popup__submit-button" type="submit">Сохранить</button>
+                </form>
             </div>
-            <button class="profile__add-button" type="button"></button>
-        </section>
-
-        <section class="elements">
-            <ul class="elements__list">
-                <li class="elements__item">
-                    <img src="./images/elements-image-karachayevsk.jpg" alt="фотография Карачаевск" class="elements__image">
-                    <div class="elements__container">
-                        <h2 class="elements__text">Карачаевск</h2>
-                        <button class="elements__like-button" type="button"></button>
-                    </div>
-                </li>
-                <li class="elements__item">
-                    <img src="./images/elements-image-elbrus.jpg" alt="фотография Гора Эльбрус" class="elements__image">
-                    <div class="elements__container">
-                        <h2 class="elements__text">Гора Эльбрус</h2>
-                        <button class="elements__like-button" type="button"></button>
-                    </div>
-                </li>
-                <li class="elements__item">
-                    <img src="./images/elements-image-dombay.jpg" alt="фотография Домбай" class="elements__image">
-                    <div class="elements__container">
-                        <h2 class="elements__text">Домбай</h2>
-                        <button class="elements__like-button" type="button"></button>
-                    </div>
-                </li>
-                <li class="elements__item">
-                    <img src="./images/elements-image-elbrus.jpg" alt="фотография гора Эльбрус" class="elements__image">
-                    <div class="elements__container">
-                        <h2 class="elements__text">Гора Эльбрус</h2>
-                        <button class="elements__like-button" type="button"></button>
-                    </div>
-                </li>
-                <li class="elements__item">
-                    <img src="./images/elements-image-dombay.jpg" alt="фотография Домбай" class="elements__image">
-                    <div class="elements__container">
-                        <h2 class="elements__text">Домбай</h2>
-                        <button class="elements__like-button" type="button"></button>
-                    </div>
-                </li>
-                <li class="elements__item">
-                    <img src="./images/elements-image-karachayevsk.jpg" alt="фотография Карачаевск" class="elements__image">
-                    <div class="elements__container">
-                        <h2 class="elements__text">Карачаево-Черкесия</h2>
-                        <button class="elements__like-button" type="button"></button>
-                    </div>
-                </li>              
-            </ul>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <p class="footer__copyright">&copy; 2022. Екатерина Сергиевская</p>
-      </footer>
-
-
-      
-  </div>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
