@@ -11,25 +11,25 @@ const formElement = document.querySelector('.popup__form');
 
 function openPopup(popupElement) {
     popupElement.classList.add('popup__opened')
-}
+};
 
 function closePopup(popupElement) {
     popupElement.classList.remove('popup__opened')
-}
+};
 
 editButton.addEventListener('click', function() {
     openPopup(popup)
     nameInput.value = titleElement.textContent
     jobInput.value = subtitleElement.textContent
-})
+});
 
 closePopupButton.addEventListener('click', function() {
     closePopup(popup)
-})
+});
 
 formElement.addEventListener('submit', function(event){
     event.preventDefault()
     titleElement.textContent = nameInput.value
     subtitleElement.textContent = jobInput.value
     closePopup(popup)
-})
+});
