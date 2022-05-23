@@ -15,3 +15,5 @@
 * Java Script
 
 **Ссылка на GitHub Pages:**
+
+https://sergievskaya.github.io/mesto/
