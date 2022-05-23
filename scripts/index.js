@@ -10,11 +10,11 @@ const formElement = document.querySelector('.popup__form');
 
 
 function openPopup(popupElement) {
-    popupElement.classList.add('popup__opened')
+    popupElement.classList.add('popup_opened')
 };
 
 function closePopup(popupElement) {
-    popupElement.classList.remove('popup__opened')
+    popupElement.classList.remove('popup_opened')
 };
 
 editButton.addEventListener('click', function() {
