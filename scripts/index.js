@@ -12,45 +12,47 @@ const popupCard = document.querySelector('.popup_type_card');
 const formElementCard = document.querySelector('#form-card');
 const initialCards = [
     {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+      name: 'Норвегия',
+      link: 'https://images.unsplash.com/photo-1656802478225-2fc5f2db08fb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDU4fDZzTVZqVExTa2VRfHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
     },
     {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+      name: 'Дубай',
+      link: 'https://images.unsplash.com/photo-1656917051695-8a6d8df727f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80'
     },
     {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+      name: 'Черепаха',
+      link: 'https://images.unsplash.com/photo-1656004953298-9de99b01941c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=381&q=80'
     },
     {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+      name: 'Шотландия',
+      link: 'https://images.unsplash.com/photo-1658143290270-5e58c837d9d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+      name: 'Птица',
+      link: 'https://images.unsplash.com/photo-1507513102283-2c608c88fd0f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+      name: 'Альпы',
+      link: 'https://images.unsplash.com/photo-1656925368663-f7e9cfb9c466?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     }
   ];
-  
-
+const cardsList = document.querySelector('.elements__list');
+const titleInput = document.querySelector('.popup__input_type_title');
+const linkInput = document.querySelector('.popup__input_type_link');
+const popupOpenImage = document.querySelector('.popup_type_open-image');
 
 function openPopup(popupElement) {
     popupElement.classList.add('popup_opened');
-}
+};
 
 // три функия для закрытия любого попапа
 function closePopup(popupElement) {
     popupElement.classList.remove('popup_opened');
-}
+};
 
 function closePopupClick(evt) {
     closePopup(evt.target.closest('.popup'));
-}
+};
 
 closePopupButton.forEach(function(button) {
     button.addEventListener('click', closePopupClick);
@@ -86,9 +88,36 @@ addButton.addEventListener('click', function() {
     openPopup(popupCard);
 });
 
-const cardsList = document.querySelector('.elements__list');
-const titleInput = document.querySelector('.popup__input_type_title');
-const linkInput = document.querySelector('.popup__input_type_link');
+
+
+//удаление карточки
+function deleteCard(evt) {
+    const card = evt.target.closest('.elements__item');
+    card.remove();  
+};
+//лайк карточки
+function likeCard(evt) {
+    evt.target.classList.toggle('elements__like-button_active');
+};
+
+
+
+function openImage(imageLink, title){
+    popupOpenImage.querySelector('.popup__image').setAttribute('src', imageLink);
+    popupOpenImage.querySelector('.popup__caption').textContent = title;
+
+    openPopup(popupOpenImage);
+}
+
+
+function previewImage(evt){
+    const image = evt.target;
+    const cardContainer = image.closest('.elements__item');
+    const imageLink = image.getAttribute('src');
+    const title = cardContainer.querySelector('.elements__text').textContent;
+    openImage(imageLink, title);
+};
+
 
 // создание карточки
 function createCard(title, link) {
@@ -98,24 +127,19 @@ function createCard(title, link) {
     card.querySelector('.elements__text').textContent = title;
     card.querySelector('.elements__image').setAttribute('src', link);
 
-    card.querySelector('.elements__delete-button').addEventListener('click', function(evt){
-      const card = evt.target.closest('.elements__item');
-      card.remove();
-    });
-    
-    card.querySelector('.elements__like-button').addEventListener('click', function(evt) {
-        evt.target.classList.toggle('elements__like-button_active')
-    });
+    card.querySelector('.elements__delete-button').addEventListener('click', deleteCard);
+    card.querySelector('.elements__like-button').addEventListener('click', likeCard);
+    card.querySelector('.elements__image').addEventListener('click', previewImage);
 
     return card;
-}
+};
 
 // добавление карточки
 function addCard(title, link) {
     const card = createCard(title, link);
 
     cardsList.prepend(card);
-}
+};
 
 
 // отправка формы
@@ -139,49 +163,5 @@ initialCards.forEach( function(element) {
 });
  
 
-
-
-/*function addCard(titlevalue, linkvalue) {
-    const cardTemplate = document.querySelector('#card').content;
-    const cardElement = cardTemplate.querySelector('.elements__item').cloneNode(true);
-    
-    cardElement.querySelector('.elements__text').textContent = titlevalue;
-    cardElement.querySelector('.elements__image').setAttribute('src', linkvalue)
-
-    cardElement.querySelector('.elements__like-button').addEventListener('click', function(evt) {
-        evt.target.classList.toggle('elements__like-button_active')
-    })
-
-    cardsList.append(cardElement);
-}
-
-
-
-/ отправка формы
-formElementCard.addEventListener('submit', function(evt){
-    evt.preventDefault();
-    const title = titleInput.value;
-    const link = linkInput.value;
-  
-    addCard(title, link);
-   
-    formElementCard.reset()
-    closePopup(popupCard);
-});
-
-
-
-
-
-
-const likeButton = document.querySelectorAll('.elements__like-button')
-
- likeButton.forEach( function (item) {
-     item.addEventListener('click', function(evt) {
-         
-         evt.target.classList.toggle('elements__like-button_active')
-     })
-})
-*/
 
 
