@@ -13,6 +13,7 @@
 * БЭМ Nested
 * Псевдоклассы CSS
 * Java Script
+* template-елементы
 
 **Ссылка на GitHub Pages:**
 

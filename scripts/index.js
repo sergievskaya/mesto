@@ -82,13 +82,10 @@ formElementProfile.addEventListener('submit', function(evt){
     closePopup(popupProfile);
 });
 
-
 //открытие попапа добавления карточки
 addButton.addEventListener('click', function() {
     openPopup(popupCard);
 });
-
-
 
 //удаление карточки
 function deleteCard(evt) {
@@ -100,24 +97,18 @@ function likeCard(evt) {
     evt.target.classList.toggle('elements__like-button_active');
 };
 
-
-
-function openImage(imageLink, title){
-    popupOpenImage.querySelector('.popup__image').setAttribute('src', imageLink);
-    popupOpenImage.querySelector('.popup__caption').textContent = title;
-
-    openPopup(popupOpenImage);
-}
-
-
-function previewImage(evt){
+// открытие попапа с картинкой
+function openImage(evt){
     const image = evt.target;
     const cardContainer = image.closest('.elements__item');
-    const imageLink = image.getAttribute('src');
-    const title = cardContainer.querySelector('.elements__text').textContent;
-    openImage(imageLink, title);
-};
+    const title = cardContainer.querySelector('.elements__text');
+    
+    popupOpenImage.querySelector('.popup__image').setAttribute('src', image.src);
+    popupOpenImage.querySelector('.popup__image').setAttribute('alt', image.alt);
+    popupOpenImage.querySelector('.popup__caption').textContent = title.textContent;
 
+    openPopup(popupOpenImage);
+};
 
 // создание карточки
 function createCard(title, link) {
@@ -126,10 +117,11 @@ function createCard(title, link) {
 
     card.querySelector('.elements__text').textContent = title;
     card.querySelector('.elements__image').setAttribute('src', link);
+    card.querySelector('.elements__image').setAttribute('alt', title);
 
     card.querySelector('.elements__delete-button').addEventListener('click', deleteCard);
     card.querySelector('.elements__like-button').addEventListener('click', likeCard);
-    card.querySelector('.elements__image').addEventListener('click', previewImage);
+    card.querySelector('.elements__image').addEventListener('click', openImage);
 
     return card;
 };
@@ -140,7 +132,6 @@ function addCard(title, link) {
 
     cardsList.prepend(card);
 };
-
 
 // отправка формы
 formElementCard.addEventListener('submit', function(evt){
@@ -161,7 +152,3 @@ initialCards.forEach( function(element) {
 
     addCard(title, link);
 });
- 
-
-
-
