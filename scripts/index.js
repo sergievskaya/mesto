@@ -3,15 +3,15 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const editProfileButton = document.querySelector('.profile__edit-button');
 const titleElement = document.querySelector('.profile__title');
 const subtitleElement = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_job');
-const formElementProfile = document.querySelector('#form-profile');
+const nameInput = document.querySelector('#name-input');
+const jobInput = document.querySelector('#job-input');
+const formProfile = document.querySelector('#form-profile');
 const popupCard = document.querySelector('.popup_type_card');
 const addCardButton = document.querySelector('.profile__add-button');
-const formElementCard = document.querySelector('#form-card');
+const formCard = document.querySelector('#form-card');
 const cardsList = document.querySelector('.elements__list');
-const titleInput = document.querySelector('.popup__input_type_title');
-const linkInput = document.querySelector('.popup__input_type_link');
+const titleInput = document.querySelector('#title-input');
+const linkInput = document.querySelector('#link-input');
 const popupOpenImage = document.querySelector('.popup_type_open-image');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__item');
 
@@ -91,8 +91,7 @@ editProfileButton.addEventListener('click', function() {
 });
 
 // отправка формы профиля
-formElementProfile.addEventListener('submit', function(evt){
-    evt.preventDefault();
+formProfile.addEventListener('submit', function(evt){
     titleElement.textContent = nameInput.value;
     subtitleElement.textContent = jobInput.value;
     closePopup(popupProfile);
@@ -104,13 +103,25 @@ addCardButton.addEventListener('click', function() {
 });
 
 // отправка формы с новой карточкой
-formElementCard.addEventListener('submit', function(evt){
-    evt.preventDefault();
+formCard.addEventListener('submit', function(evt){
     const cardData = {
         name: titleInput.value,
         link: linkInput.value
     };
     addCard(cardData);
-    formElementCard.reset();
+    formCard.reset();
     closePopup(popupCard);
 });
+
+
+const formsConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputInvalidClass: 'popup__input_invalid'
+};
+
+enableValidation(formsConfig);
+
+
