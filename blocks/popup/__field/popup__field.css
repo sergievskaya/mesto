@@ -1,5 +1,5 @@
 .popup__field:last-of-type {
-    margin-bottom: 18px
+    margin-bottom: 18px;
 }
 
 @media screen and (max-width: 767px) {
