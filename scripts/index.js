@@ -3,24 +3,33 @@ const popupProfile = document.querySelector('.popup_type_profile');
 const editProfileButton = document.querySelector('.profile__edit-button');
 const titleElement = document.querySelector('.profile__title');
 const subtitleElement = document.querySelector('.profile__subtitle');
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_job');
-const formElementProfile = document.querySelector('#form-profile');
+const nameInput = document.querySelector('#name-input');
+const jobInput = document.querySelector('#job-input');
+const formProfile = document.querySelector('#form-profile');
 const popupCard = document.querySelector('.popup_type_card');
 const addCardButton = document.querySelector('.profile__add-button');
-const formElementCard = document.querySelector('#form-card');
+const formCard = document.querySelector('#form-card');
 const cardsList = document.querySelector('.elements__list');
-const titleInput = document.querySelector('.popup__input_type_title');
-const linkInput = document.querySelector('.popup__input_type_link');
+const titleInput = document.querySelector('#title-input');
+const linkInput = document.querySelector('#link-input');
 const popupOpenImage = document.querySelector('.popup_type_open-image');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__item');
+const formsConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_disabled',
+    inputInvalidClass: 'popup__input_invalid'
+};
 
 function openPopup(popupElement) {
     popupElement.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupEsc);
 };
 
 function closePopup(popupElement) {
     popupElement.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupEsc);
 };
 
 //удаление карточки
@@ -46,6 +55,16 @@ function openImage(evt){
     openPopup(popupOpenImage);
 };
 
+function clickCard(evt) {
+    if (evt.target.classList.contains('elements__delete-button')) {
+    deleteCard(evt);
+    } else if (evt.target.classList.contains('elements__like-button')) {
+        likeCard(evt);
+    } else if (evt.target.classList.contains('elements__image')){
+        openImage(evt);
+    }
+}
+
 // создание карточки
 function createCard(cardData) {
     const card = cardTemplate.cloneNode(true);
@@ -55,10 +74,8 @@ function createCard(cardData) {
     cardImage.setAttribute('alt', cardData.name);
     card.querySelector('.elements__text').textContent = cardData.name;
 
-    card.querySelector('.elements__delete-button').addEventListener('click', deleteCard);
-    card.querySelector('.elements__like-button').addEventListener('click', likeCard);
-    cardImage.addEventListener('click', openImage);
-
+    card.addEventListener('click', clickCard);
+    
     return card;
 };
 
@@ -83,6 +100,14 @@ popups.forEach(function(popupElement) {
     });
 });
 
+function closePopupEsc(evt) {
+    if(evt.key === 'Escape') {
+        popups.forEach(function(popup) {
+            closePopup(popup);
+          });
+    };
+};
+
 // открытие попапа профиля
 editProfileButton.addEventListener('click', function() {
     openPopup(popupProfile);
@@ -91,8 +116,7 @@ editProfileButton.addEventListener('click', function() {
 });
 
 // отправка формы профиля
-formElementProfile.addEventListener('submit', function(evt){
-    evt.preventDefault();
+formProfile.addEventListener('submit', function(evt){
     titleElement.textContent = nameInput.value;
     subtitleElement.textContent = jobInput.value;
     closePopup(popupProfile);
@@ -104,13 +128,16 @@ addCardButton.addEventListener('click', function() {
 });
 
 // отправка формы с новой карточкой
-formElementCard.addEventListener('submit', function(evt){
-    evt.preventDefault();
+formCard.addEventListener('submit', function(evt){
     const cardData = {
         name: titleInput.value,
         link: linkInput.value
     };
     addCard(cardData);
-    formElementCard.reset();
+    formCard.reset();
     closePopup(popupCard);
 });
+
+enableValidation(formsConfig);
+
+
