@@ -63,7 +63,7 @@ function clickCard(evt) {
     } else if (evt.target.classList.contains('elements__image')){
         openImage(evt);
     }
-}
+};
 
 // создание карточки
 function createCard(cardData) {
