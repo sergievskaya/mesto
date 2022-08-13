@@ -138,5 +138,3 @@ formCard.addEventListener('submit', function(evt){
 });
 
 enableValidation(formsConfig);
-
-
