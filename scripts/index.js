@@ -1,18 +1,19 @@
 const popups = document.querySelectorAll('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
-const editProfileButton = document.querySelector('.profile__edit-button');
+const buttonEditProfile = document.querySelector('.profile__edit-button');
 const titleElement = document.querySelector('.profile__title');
 const subtitleElement = document.querySelector('.profile__subtitle');
 const nameInput = document.querySelector('#name-input');
 const jobInput = document.querySelector('#job-input');
 const formProfile = document.querySelector('#form-profile');
 const popupCard = document.querySelector('.popup_type_card');
-const addCardButton = document.querySelector('.profile__add-button');
+const buttonAddCard = document.querySelector('.profile__add-button');
 const formCard = document.querySelector('#form-card');
 const cardsList = document.querySelector('.elements__list');
 const titleInput = document.querySelector('#title-input');
 const linkInput = document.querySelector('#link-input');
 const popupOpenImage = document.querySelector('.popup_type_open-image');
+const imageInPopup = popupOpenImage.querySelector('.popup__image');
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.elements__item');
 const formsConfig = {
     formSelector: '.popup__form',
@@ -47,9 +48,8 @@ function openImage(evt){
     const image = evt.target;
     const cardContainer = image.closest('.elements__item');
     const title = cardContainer.querySelector('.elements__text');
-    
-    popupOpenImage.querySelector('.popup__image').setAttribute('src', image.src);
-    popupOpenImage.querySelector('.popup__image').setAttribute('alt', image.alt);
+    imageInPopup.setAttribute('src', image.src);
+    imageInPopup.setAttribute('alt', image.alt);
     popupOpenImage.querySelector('.popup__caption').textContent = title.textContent;
 
     openPopup(popupOpenImage);
@@ -102,14 +102,13 @@ popups.forEach(function(popupElement) {
 
 function closePopupEsc(evt) {
     if(evt.key === 'Escape') {
-        popups.forEach(function(popup) {
-            closePopup(popup);
-          });
+       const popup = document.querySelector('.popup_opened');
+       closePopup(popup);
     };
 };
 
 // открытие попапа профиля
-editProfileButton.addEventListener('click', function() {
+buttonEditProfile.addEventListener('click', function() {
     openPopup(popupProfile);
     nameInput.value = titleElement.textContent;
     jobInput.value = subtitleElement.textContent;
@@ -123,7 +122,7 @@ formProfile.addEventListener('submit', function(evt){
 });
 
 //открытие попапа добавления карточки
-addCardButton.addEventListener('click', function() {
+buttonAddCard.addEventListener('click', function() {
     openPopup(popupCard);
 });
 
