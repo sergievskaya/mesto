@@ -1,9 +1,9 @@
 export class Card {
-    constructor(data, templateSelector, openImage) {
+    constructor({ data, handleCardClick }, templateSelector) {
         this._name = data.name;
         this._link = data.link;
         this._templateSelector = templateSelector;
-        this._openImage = openImage;
+        this._handleCardClick = handleCardClick;
     }
     
     _getTemplate() {
@@ -31,7 +31,7 @@ export class Card {
     //повесить слушатели
     _setEventListeners() {
         this._imageElement.addEventListener('click', () => {
-            this._openImage(this._name, this._link);
+            this._handleCardClick(this._name, this._link);
         });
 
         this._element.querySelector('.elements__like-button').addEventListener('click', (evt) => {
