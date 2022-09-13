@@ -37,3 +37,10 @@ export const formsConfig = {
     inactiveButtonClass: 'popup__submit-button_disabled',
     inputInvalidClass: 'popup__input_invalid'
 };
+export const config = {
+  cardTemplateSelector: '.card-template',
+  cardContainerSelector: '.elements__list',
+  popupProfileSelector: '.popup_type_profile',
+  popupOpenImageSelector: '.popup_type_open-image',
+  popupCardSelector: '.popup_type_card',
+};

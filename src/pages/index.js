@@ -1,7 +1,7 @@
 import './index.css';
 import { 
     initialCards, buttonEditProfile, buttonAddCard, nameInput,
-    jobInput, formProfile, formCard, formsConfig
+    jobInput, formProfile, formCard, formsConfig, config
 } from "../utils/constants.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -10,7 +10,6 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js"; 
 import { UserInfo } from "../components/UserInfo.js";
 
-
 //создание новой карточки, экземпляра класса Card
 function createCard(cardData) {
     const card = new Card({
@@ -18,7 +17,7 @@ function createCard(cardData) {
         handleCardClick: (name, link) => {
             popupOpenImage.open(name, link);
         }
-    }, '.card-template');
+    }, config.cardTemplateSelector);
     const cardElement = card.generateCard();
     return cardElement;
 }
@@ -29,15 +28,13 @@ const cardsList = new Section({
     renderer: (item) => {
         cardsList.addItem(createCard(item));
     } 
-}, '.elements__list');
+}, config.cardContainerSelector);
 
 cardsList.renderItems();
 
-
 // создание экзкмпляра класса для попапа с картинкой
-const popupOpenImage = new PopupWithImage('.popup_type_open-image');
+const popupOpenImage = new PopupWithImage(config.popupOpenImageSelector);
 popupOpenImage.setEventListeners();
-
 
 // создание экземпляра класса UserInfo
 const userInfo = new UserInfo({
@@ -46,7 +43,7 @@ const userInfo = new UserInfo({
 });
 
 // создание экземпляра класса для попапа профиля
-const popupProfile = new PopupWithForm('.popup_type_profile', (data) => {
+const popupProfile = new PopupWithForm(config.popupProfileSelector, (data) => {
     userInfo.setUserInfo(data);
     popupProfile.close();
 });
@@ -63,7 +60,7 @@ buttonEditProfile.addEventListener('click', function() {
 });
 
 // создание экземпляра класса для попапа добавления карточки
-const popupCard = new PopupWithForm('.popup_type_card', (data) => {
+const popupCard = new PopupWithForm(config.popupCardSelector, (data) => {
     cardsList.addItem(createCard(data));
     popupCard.close();
 });
@@ -75,7 +72,6 @@ buttonAddCard.addEventListener('click', function() {
     formCardValidation.resetError();
     popupCard.open();
 });
-
 
 //Создание зкземпляров класса FormValidaator, включение валидаии
 const formCardValidation = new FormValidator(formsConfig, formCard);
