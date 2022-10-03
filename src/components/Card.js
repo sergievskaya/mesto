@@ -52,9 +52,7 @@ export class Card {
 
     //проверить стоит ли лайк на карточке
     _checkLikedCard() {
-        if (this._cardData.likes.some((user) => {
-            return user._id === this._userId;
-        })) {
+        if (this._cardData.likes.some((user) => user._id === this._userId)) {
             this._likeButton.classList.add('elements__like-button_active');
         }
         }

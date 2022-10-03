@@ -20,8 +20,7 @@ const api = new Api({
       authorization: 'c178ff20-af0a-4e0f-9c0d-216464e441d9',
       'Content-Type': 'application/json'
     }
-  }); 
-
+}); 
 
 let userId;
 
@@ -31,13 +30,18 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo(userData);
     userInfo.setAvatarInfo(userData);
     userId = userData._id;
-    cardsList.renderItems(initialCards.reverse()); //поменять методб чтобы загружались в др порядке
+    cardsList.renderItems(initialCards.reverse());
   })
   .catch((err) => {
     console.log(err);
   });
 
-
+  // создание экземпляра класса UserInfo
+const userInfo = new UserInfo({
+    userNameSelector: '.profile__title',
+    userDescriptionSelector: '.profile__subtitle',
+    userAvatarSelector: '.profile__avatar-image'
+});
 
 //создание новой карточки, экземпляра класса Card
 function createCard(cardData) {
@@ -58,8 +62,7 @@ function createCard(cardData) {
                   .catch((err) => {
                     console.log(err);
                 })
-            }
-            )
+            })
         },
         handleAddLikeClick: (cardId) => {
             api.addLikeCard(cardId)
@@ -86,25 +89,12 @@ function createCard(cardData) {
 
 //создание экземпляра класса Section
 const cardsList = new Section({
-    //items: initialCards,
     renderer: (item) => {
         cardsList.addItem(createCard(item));
     } 
 }, config.cardContainerSelector);
 
-
-// создание экзкмпляра класса для попапа с картинкой
-const popupOpenImage = new PopupWithImage(config.popupOpenImageSelector);
-popupOpenImage.setEventListeners();
-
-// создание экземпляра класса UserInfo
-const userInfo = new UserInfo({
-    userNameSelector: '.profile__title',
-    userDescriptionSelector: '.profile__subtitle',
-    userAvatarSelector: '.profile__avatar-image'
-});
-
-// создание экземпляра класса для попапа профиля
+// создание экземпляра класса для попапа редактирования профиля
 const popupProfile = new PopupWithForm(config.popupProfileSelector, {
     handleFormSubmit: (data) => {
         popupProfile.loading(true);
@@ -121,10 +111,9 @@ const popupProfile = new PopupWithForm(config.popupProfileSelector, {
           })
     }
 });
-
 popupProfile.setEventListeners();
 
-// открытие попапа профиля
+// открытие попапа редактирования профиля
 buttonEditProfile.addEventListener('click', function() {
     formProfileValidation.resetError();
     const userData = userInfo.getUserInfo();
@@ -150,10 +139,9 @@ const popupAvatar = new PopupWithForm( config.popupAvatarSelector, {
           })
     }
 });
-
 popupAvatar.setEventListeners();
 
-// открытие попапа аватара
+// открытие попапа редактирования аватара
 buttonEditAvatar.addEventListener('click', function() {
     formAvatarValidation.resetError();
     popupAvatar.open();
@@ -184,7 +172,11 @@ buttonAddCard.addEventListener('click', function() {
     popupCard.open();
 });
 
- 
+// создание экзкмпляра класса для попапа с картинкой
+const popupOpenImage = new PopupWithImage(config.popupOpenImageSelector);
+popupOpenImage.setEventListeners();
+
+
 // попап удаления карточки 
 const popupDeleteCard = new PopupWithSubmit(config.popupDeleteCardSelector);
 popupDeleteCard.setEventListeners();
