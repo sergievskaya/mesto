@@ -10,6 +10,7 @@
     padding: 0;
     cursor: pointer;
     transition: opacity 0.2s ease;
+    outline: none;
 }
 .elements__delete-button:hover {
     opacity: 0.6;
